@@ -41,3 +41,27 @@ const Thing = conn.define('thing', {
     notEmpty: true
   }
 });
+
+const syncAndSeed = async()=> {
+  await conn.sync({ force: true });
+  const people = [
+    {name: 'Matt'},
+    {name: 'Robert'},
+    {name: 'Carl'}
+  ];
+  const places = [
+    {name: 'SLO'},
+    {name: 'Los Osos'},
+    {name: 'Paso Robles'}
+  ];
+  const things = [
+    {name: 'water'},
+    {name: 'pizza'},
+    {name: 'rocks'}
+  ];
+  await Promise.all(people.map(person => Person.create(person)));
+  await Promise.all(places.map(place => Place.create(place)));
+  await Promise.all(things.map(thing => Thing.create(thing)));
+};
+
+syncAndSeed();
