@@ -72,4 +72,11 @@ const syncAndSeed = async()=> {
   await Promise.all(things.map(thing => Thing.create(thing)));
 };
 
-syncAndSeed();
+module.exports = {
+  syncAndSeed,
+  models: {
+    Person,
+    Place,
+    Thing
+  }
+}
